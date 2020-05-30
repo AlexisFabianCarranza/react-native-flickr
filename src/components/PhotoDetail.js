@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Text, View, Image, Linking } from 'react-native';
 import Card from './Card';
 import CardSection from './CardSection';
 import Button from './Button';
+import axios from 'axios';
 
-const PhotoDetail = ({ title, imageUrl }) => {
+const PhotoDetail = ({ title, imageUrl, photoId }) => {
   const {
     thumbnailStyle,
     headerContentStyle,
@@ -12,6 +13,17 @@ const PhotoDetail = ({ title, imageUrl }) => {
     headerTextStyle,
     imageStyle
   } = styles;
+
+  const [comments, setComments] = useState(null);
+  const [commentsVisible, setCommentsVisible] = useState(false);
+
+  useEffect(() => {
+    const fetchComments = () => {
+      axios.get(`https://api.flickr.com/services/rest/?method=flickr.photos.comments.getList&api_key=6e8a597cb502b7b95dbd46a46e25db8d&photo_id=${photoId}&format=json&nojsoncallback=1`)
+      .then(response => setComments(response.data.comments.comment)); 
+    }
+    fetchComments()
+  }, [])
 
   return (
     <Card>
@@ -40,11 +52,28 @@ const PhotoDetail = ({ title, imageUrl }) => {
           See Now!
         </Button>
       </CardSection>
+
+      <CardSection>
+        <Button onPress={() => setCommentsVisible(commentsVisible => !commentsVisible)}>
+          {!commentsVisible ? 'Show comments' : 'Hide comments'}
+        </Button>
+      </CardSection>
+      {commentsVisible && comments.map(comment => {
+        return (
+          <CardSection>
+            <Text style={styles.commentAuthor} >{comment.realname}: </Text>
+            <Text>{comment._content}</Text>
+          </CardSection>
+        )
+      })}
     </Card>
   );
 };
 
 const styles = {
+  commentAuthor: {
+    color: 'blue'
+  },
   headerContentStyle: {
     flexDirection: 'column',
     justifyContent: 'space-around'
