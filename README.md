@@ -1,8 +1,11 @@
-## Trabajo Practico - Desarrollo de software multipantalla 2020
+## Trabajo Practico - Desarrollo de software multipantalla 2020 5k4
 Integrantes:
 + Leguizamon Tomassi Nicolas <br>
 + Urquiza Mayra <br>
 + Carranza Alexis Fabian <br>
+## Profesores
++ Rubio, Diego Martin
++ Gonzalez, Claudio Javier
 ## Tecnologias
 * React Native
 * React Navigation
@@ -26,6 +29,4 @@ npm install
 ```bash
 npm run android
 ```
-
-
-## Eteam - Personal - Telecom
+## UTN - FRC 
