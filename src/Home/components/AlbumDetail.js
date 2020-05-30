@@ -1,11 +1,10 @@
 import React from 'react';
 import {Text, View} from 'react-native';
-import Card from './Card';
-import CardSection from './CardSection';
-import Button from './Button';
-import {Actions} from 'react-native-router-flux';
+import Card from '../../Photo/components/Card';
+import CardSection from '../../Photo/components/CardSection';
+import Button from '../../Photo/components/Button';
 
-const AlbumDetail = ({title, albumId}) => {
+const AlbumDetail = ({navigation, title, albumId}) => {
   const {headerContentStyle, headerTextStyle} = styles;
 
   return (
@@ -17,7 +16,10 @@ const AlbumDetail = ({title, albumId}) => {
       </CardSection>
 
       <CardSection>
-        <Button onPress={() => Actions.photoList({albumId: albumId})}>
+        <Button
+          onPress={() =>
+            navigation.navigate('photoScreen', {albumId: albumId})
+          }>
           See Now!
         </Button>
       </CardSection>
