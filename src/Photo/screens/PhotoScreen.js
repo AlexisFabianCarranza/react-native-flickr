@@ -1,12 +1,19 @@
 import React, {useState, useEffect} from 'react';
-import {ScrollView, Text, View} from 'react-native';
+import {ScrollView, View} from 'react-native';
 import axios from 'axios';
 import PhotoDetail from '../components/PhotoDetail';
+import Loading from '../../Shared/components/Loading';
 
 const PhotoScreen = ({route}) => {
   const [photos, setPhotos] = useState(null);
+  const [loading, setLoading] = useState(true);
   const {albumId} = route.params;
 
+  useEffect(() => {
+    if (!photos) {
+      setTimeout(() => setLoading(!loading), 1200);
+    }
+  }, [loading, photos]);
   useEffect(() => {
     const fetchData = () => {
       axios
@@ -15,7 +22,6 @@ const PhotoScreen = ({route}) => {
         )
         .then(response => setPhotos(response.data.photoset.photo));
     };
-
     fetchData();
   }, [albumId]);
 
@@ -32,12 +38,8 @@ const PhotoScreen = ({route}) => {
     ));
   };
 
-  if (!photos) {
-    return (
-      <View style={{flex: 1}}>
-        <Text>Loading...</Text>
-      </View>
-    );
+  if (loading) {
+    return <Loading />;
   }
 
   return (

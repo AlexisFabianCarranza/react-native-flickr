@@ -1,11 +1,18 @@
 import React, {useState, useEffect} from 'react';
-import {ScrollView, Text, View} from 'react-native';
+import {ScrollView, View} from 'react-native';
 import axios from 'axios';
 import AlbumDetail from '../components/AlbumDetail';
+import Loading from '../../Shared/components/Loading';
 
 const AlbumScreen = ({navigation}) => {
   const [photoset, setPhotoset] = useState(null);
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    if (!photoset) {
+      setTimeout(() => setLoading(!loading), 1200);
+    }
+  }, [loading, photoset]);
   useEffect(() => {
     const fetchData = () => {
       axios
@@ -29,8 +36,8 @@ const AlbumScreen = ({navigation}) => {
     ));
   };
 
-  if (!photoset) {
-    return <Text>Loading...</Text>;
+  if (loading) {
+    return <Loading />;
   }
 
   return (
