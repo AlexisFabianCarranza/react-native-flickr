@@ -1,8 +1,8 @@
 import React from 'react';
 import {Text, View} from 'react-native';
-import Card from '../../Photo/components/Card';
-import CardSection from '../../Photo/components/CardSection';
-import Button from '../../Photo/components/Button';
+import Card from '../../Shared/components/Card';
+import CardSection from '../../Shared/components/CardSection';
+import Button from '../../Shared/components/Button';
 
 const AlbumDetail = ({navigation, title, albumId}) => {
   const {headerContentStyle, headerTextStyle} = styles;

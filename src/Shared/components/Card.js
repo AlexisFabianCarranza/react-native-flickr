@@ -1,24 +1,22 @@
 import React from 'react';
-import {View} from 'react-native';
+import {Card as CardPaper} from 'react-native-paper';
 
 const Card = props => {
-  return <View style={styles.containerStyle}>{props.children}</View>;
+  return <CardPaper style={styles.containerStyle}>{props.children}</CardPaper>;
 };
 
 const styles = {
   containerStyle: {
     borderWidth: 1,
-    borderRadius: 2,
+    borderRadius: 12,
     borderColor: '#ddd',
     borderBottomWidth: 0,
-    shadowColor: '#000',
+    shadowColor: '#fff',
     shadowOffset: {width: 0, height: 2},
     shadowOpacity: 0.1,
     shadowRadius: 2,
     elevation: 1,
-    marginLeft: 5,
-    marginRight: 5,
-    marginTop: 10,
+    margin: '3%',
   },
 };
 

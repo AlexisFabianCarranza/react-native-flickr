@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react';
 import {Text, View, Image, Linking} from 'react-native';
-import Card from './Card';
-import CardSection from './CardSection';
-import Button from './Button';
+import Card from '../../Shared/components/Card';
+import CardSection from '../../Shared/components/CardSection';
+import Button from '../../Shared/components/Button';
+import {List} from 'react-native-paper';
 import axios from 'axios';
 
 const PhotoDetail = ({title, imageUrl, photoId}) => {
@@ -15,16 +16,20 @@ const PhotoDetail = ({title, imageUrl, photoId}) => {
   } = styles;
 
   const [comments, setComments] = useState(null);
-  const [commentsVisible, setCommentsVisible] = useState(false);
+  const [commentsOn, putCommentsOn] = useState(false);
 
+  const _searchComment = async () => {
+    try {
+      let response = await axios.get(
+        `https://api.flickr.com/services/rest/?method=flickr.photos.comments.getList&api_key=6e8a597cb502b7b95dbd46a46e25db8d&photo_id=${photoId}&format=json&nojsoncallback=1`,
+      );
+      setComments(response.data.comments.comment);
+    } catch (err) {
+      console.log(err);
+    }
+  };
   useEffect(() => {
-    const fetchComments = () => {
-      axios
-        .get(
-          `https://api.flickr.com/services/rest/?method=flickr.photos.comments.getList&api_key=6e8a597cb502b7b95dbd46a46e25db8d&photo_id=${photoId}&format=json&nojsoncallback=1`,
-        )
-        .then(response => setComments(response.data.comments.comment));
-    };
+    const fetchComments = () => {};
     fetchComments();
   }, [photoId]);
 
@@ -49,18 +54,24 @@ const PhotoDetail = ({title, imageUrl, photoId}) => {
 
       <CardSection>
         <Button
-          onPress={() =>
-            setCommentsVisible(commentsVisible => !commentsVisible)
-          }>
-          {!commentsVisible ? 'Show comments' : 'Hide comments'}
+          onPress={() => {
+            _searchComment();
+            putCommentsOn(commentsOn => !commentsOn);
+          }}>
+          {!commentsOn ? 'Show comments' : 'Hide comments'}
         </Button>
       </CardSection>
-      {commentsVisible &&
-        comments.map(comment => {
+      {commentsOn &&
+        comments &&
+        comments.map((comment, index) => {
           return (
-            <CardSection>
-              <Text style={styles.commentAuthor}>{comment.realname}: </Text>
-              <Text>{comment._content}</Text>
+            <CardSection key={index}>
+              <List.Item
+                title={comment.realname}
+                description={comment._content}
+                style={{flex: 1}}
+                left={props => <List.Icon {...props} icon="comment" />}
+              />
             </CardSection>
           );
         })}
