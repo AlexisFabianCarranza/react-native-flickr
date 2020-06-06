@@ -1,8 +1,9 @@
 ## Trabajo Practico - Desarrollo de software multipantalla 2020 5k4
+## UTN - FRC 
 Integrantes:
-+ Leguizamon Tomassi Nicolas <br>
-+ Urquiza Mayra <br>
-+ Carranza Alexis Fabian <br>
++ Leguizamon Tomassi Nicolas (70390) <br>
++ Urquiza Mayra (71024) <br>
++ Carranza Alexis Fabian (69) <br>
 ## Profesores
 + Rubio, Diego Martin
 + Gonzalez, Claudio Javier
@@ -18,7 +19,7 @@ La informacion de la api se puede encontrar en el siguiente link: <br>
 ![Home](.readme-static/home.png) <br>
 ![Photo](.readme-static/photos.png) <br>
 ## Prerequisitos
-Para correr la aplicacion debe seguir las reglas de instalacion de React Native: <br>
+Para correr la aplicacion debe seguir el instructivo de setup de entorno de React Native: <br>
 [https://reactnative.dev/docs/environment-setup](https://reactnative.dev/docs/environment-setup)
 ## Despliegue en modo desarrollo
 1 - Para ejecutar el proyecto debe tener instalado un emulador o un celular conectado. 
@@ -29,4 +30,3 @@ npm install
 ```bash
 npm run android
 ```
-## UTN - FRC 
