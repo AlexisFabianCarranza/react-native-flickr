@@ -3,7 +3,7 @@
 Integrantes:
 + Leguizamon Tomassi Nicolas (70390) <br>
 + Urquiza Mayra (71024) <br>
-+ Carranza Alexis Fabian (69) <br>
++ Carranza Alexis Fabian (69882) <br>
 ## Profesores
 + Rubio, Diego Martin
 + Gonzalez, Claudio Javier
